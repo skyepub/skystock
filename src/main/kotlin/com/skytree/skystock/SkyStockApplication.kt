@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class SkyStockApplication
+class SkystockApplication
 
 fun main(args: Array<String>) {
-    runApplication<SkyStockApplication>(*args)
+    runApplication<SkystockApplication>(*args)
 }

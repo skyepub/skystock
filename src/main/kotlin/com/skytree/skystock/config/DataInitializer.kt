@@ -158,7 +158,7 @@ class DataInitializer(
         alertRepo.save(StockAlert(skymallProductId = 14, skymallProductName = "스테인리스 냄비 세트", safetyStock = 10, reorderPoint = 15, reorderQuantity = 40, alertLevel = AlertLevel.NORMAL))
         alertRepo.save(StockAlert(skymallProductId = 15, skymallProductName = "LED 스탠드 조명", safetyStock = 15, reorderPoint = 20, reorderQuantity = 50, alertLevel = AlertLevel.NORMAL))
 
-        println("=== SkyStock 샘플 데이터 초기화 완료 ===")
+        println("=== skystock 샘플 데이터 초기화 완료 ===")
         println("  사용자: ${userRepo.count()}명")
         println("  공급사: ${supplierRepo.count()}개")
         println("  공급사-상품: ${supplierProductRepo.count()}개")

@@ -1,4 +1,4 @@
-# SkyStock API Specification v1
+# skystock API Specification v1
 
 > 재고/발주 관리 시스템 — skymall(쇼핑몰)과 연계
 
@@ -6,16 +6,16 @@
 
 | 항목 | 값 |
 |------|-----|
-| 서비스명 | SkyStock |
-| 포트 | 8081 |
-| 베이스 URL | `http://localhost:8081` |
+| 서비스명 | skystock |
+| 포트 | 9091 |
+| 베이스 URL | `http://localhost:9091` |
 | DB | MySQL `skystock` (home.skyepub.net:63306) |
 | 인증 | JWT Bearer Token (독립 secret) |
-| 연계 시스템 | skymall (port 8080, DB `skymall`) — 별도 인증 체계 |
+| 연계 시스템 | skymall (port 9090, DB `skymall`) — 별도 인증 체계 |
 
 ## 인증
 
-SkyStock은 독립된 JWT 체계를 사용한다. skymall과는 별개의 secret(`skystock-secret-key-must-be-at-least-32-bytes-long`)을 가지며, 두 시스템의 토큰은 호환되지 않는다. 크로스 시스템 호출 시에는 각 시스템에 별도로 로그인하여 토큰을 발급받아야 한다.
+skystock은 독립된 JWT 체계를 사용한다. skymall과는 별개의 secret(`skystock-secret-key-must-be-at-least-32-bytes-long`)을 가지며, 두 시스템의 토큰은 호환되지 않는다. 크로스 시스템 호출 시에는 각 시스템에 별도로 로그인하여 토큰을 발급받아야 한다.
 
 ### 역할 (Role)
 
@@ -309,29 +309,29 @@ skymallProductId는 unique — 상품당 하나의 알림 설정만 존재.
 
 ### 사전 준비: 양쪽 시스템 인증
 ```
-1. POST skymall:8080/api/auth/login → skymall_token 획득
-2. POST skystock:8081/api/auth/login → skystock_token 획득
+1. POST skymall:9090/api/auth/login → skymall_token 획득
+2. POST skystock:9091/api/auth/login → skystock_token 획득
 ```
 
-### 1. skymall 재고부족 → SkyStock 발주 생성
+### 1. skymall 재고부족 → skystock 발주 생성
 ```
-1. GET skymall:8080/api/products/low-stock (skymall_token) → 재고부족 상품 목록
-2. GET skystock:8081/api/suppliers/by-product/{productId} (skystock_token) → 공급사 확인
-3. POST skystock:8081/api/purchase-orders (skystock_token) → 발주 생성
-```
-
-### 2. SkyStock 입고 완료 → skymall 재고 보충
-```
-1. POST skystock:8081/api/purchase-orders/{id}/receive (skystock_token) → 입고 완료
-2. GET skystock:8081/api/purchase-orders/{id} (skystock_token) → 입고 품목/수량 확인
-3. PATCH skymall:8080/api/products/{id}/restock (skymall_token) → 상품별 재고 보충
+1. GET skymall:9090/api/products/low-stock (skymall_token) → 재고부족 상품 목록
+2. GET skystock:9091/api/suppliers/by-product/{productId} (skystock_token) → 공급사 확인
+3. POST skystock:9091/api/purchase-orders (skystock_token) → 발주 생성
 ```
 
-### 3. skymall 매출 리포트 → SkyStock 안전재고 조정
+### 2. skystock 입고 완료 → skymall 재고 보충
 ```
-1. GET skymall:8080/api/orders/report?from=&to= (skymall_token) → 매출 리포트
+1. POST skystock:9091/api/purchase-orders/{id}/receive (skystock_token) → 입고 완료
+2. GET skystock:9091/api/purchase-orders/{id} (skystock_token) → 입고 품목/수량 확인
+3. PATCH skymall:9090/api/products/{id}/restock (skymall_token) → 상품별 재고 보충
+```
+
+### 3. skymall 매출 리포트 → skystock 안전재고 조정
+```
+1. GET skymall:9090/api/orders/report?from=&to= (skymall_token) → 매출 리포트
 2. (AI 분석: 판매량 기반 적정 안전재고 계산)
-3. PATCH skystock:8081/api/stock-alerts/{id} (skystock_token) → 안전재고/재발주점 조정
+3. PATCH skystock:9091/api/stock-alerts/{id} (skystock_token) → 안전재고/재발주점 조정
 ```
 
 ---
