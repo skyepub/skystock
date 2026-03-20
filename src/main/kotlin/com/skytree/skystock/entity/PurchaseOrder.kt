@@ -42,10 +42,10 @@ class PurchaseOrder(
     var expectedDate: LocalDate? = null,
 
     @Column(name = "created_at")
-    val createdAt: LocalDateTime = LocalDateTime.now(),
+    val createdAt: LocalDateTime? = LocalDateTime.now(),
 
     @Column(name = "updated_at")
-    var updatedAt: LocalDateTime = LocalDateTime.now(),
+    var updatedAt: LocalDateTime? = LocalDateTime.now(),
 
     @OneToMany(mappedBy = "purchaseOrder", cascade = [CascadeType.ALL], orphanRemoval = true)
     val items: MutableList<PurchaseItem> = mutableListOf(),

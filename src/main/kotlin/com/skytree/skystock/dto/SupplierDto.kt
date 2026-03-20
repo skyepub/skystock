@@ -43,9 +43,9 @@ data class SupplierResponse(
     val contactEmail: String?,
     val contactPhone: String?,
     val address: String?,
-    val leadTimeDays: Int,
+    val leadTimeDays: Int?,
     val isActive: Boolean,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime?
 ) {
     companion object {
         fun from(supplier: Supplier) = SupplierResponse(

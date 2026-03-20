@@ -30,7 +30,7 @@ class User(
     var isEnabled: Boolean = true,
 
     @Column(name = "created_at")
-    val createdAt: LocalDateTime = LocalDateTime.now(),
+    val createdAt: LocalDateTime? = LocalDateTime.now(),
 
     @Column(name = "last_login_at")
     var lastLoginAt: LocalDateTime? = null

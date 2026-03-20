@@ -33,8 +33,8 @@ class StockAlert(
     var alertLevel: AlertLevel = AlertLevel.NORMAL,
 
     @Column(name = "created_at")
-    val createdAt: LocalDateTime = LocalDateTime.now(),
+    val createdAt: LocalDateTime? = LocalDateTime.now(),
 
     @Column(name = "updated_at")
-    var updatedAt: LocalDateTime = LocalDateTime.now()
+    var updatedAt: LocalDateTime? = LocalDateTime.now()
 )

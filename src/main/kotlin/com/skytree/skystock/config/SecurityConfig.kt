@@ -25,6 +25,7 @@ class SecurityConfig(
                 auth
                     // 공개 — 인증 불필요
                     .requestMatchers("/api/auth/**").permitAll()
+                    .requestMatchers("/error").permitAll()
 
                     // Supplier 관리 — ADMIN만 CUD
                     .requestMatchers(HttpMethod.POST, "/api/suppliers/**").hasRole("ADMIN")

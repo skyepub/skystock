@@ -24,13 +24,13 @@ class Supplier(
     var address: String? = null,
 
     @Column(name = "lead_time_days")
-    var leadTimeDays: Int = 7,
+    var leadTimeDays: Int? = 7,
 
     @Column(name = "is_active", nullable = false)
     var isActive: Boolean = true,
 
     @Column(name = "created_at")
-    val createdAt: LocalDateTime = LocalDateTime.now(),
+    val createdAt: LocalDateTime? = LocalDateTime.now(),
 
     @OneToMany(mappedBy = "supplier", cascade = [CascadeType.ALL], orphanRemoval = true)
     val products: MutableList<SupplierProduct> = mutableListOf()

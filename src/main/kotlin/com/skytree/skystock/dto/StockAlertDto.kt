@@ -37,8 +37,8 @@ data class StockAlertResponse(
     val reorderPoint: Int,
     val reorderQuantity: Int,
     val alertLevel: AlertLevel,
-    val createdAt: LocalDateTime,
-    val updatedAt: LocalDateTime
+    val createdAt: LocalDateTime?,
+    val updatedAt: LocalDateTime?
 ) {
     companion object {
         fun from(alert: StockAlert) = StockAlertResponse(

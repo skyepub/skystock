@@ -36,8 +36,8 @@ data class PurchaseOrderResponse(
     val orderedBy: String,
     val totalCost: Double,
     val expectedDate: LocalDate?,
-    val createdAt: LocalDateTime,
-    val updatedAt: LocalDateTime,
+    val createdAt: LocalDateTime?,
+    val updatedAt: LocalDateTime?,
     val items: List<PurchaseItemResponse>
 ) {
     companion object {
@@ -80,7 +80,7 @@ data class ReceivingLogResponse(
     val id: Int,
     val purchaseOrderId: Int,
     val receivedBy: String,
-    val receivedAt: LocalDateTime,
+    val receivedAt: LocalDateTime?,
     val notes: String?
 ) {
     companion object {

@@ -19,7 +19,7 @@ class ReceivingLog(
     var receivedBy: String,
 
     @Column(name = "received_at")
-    val receivedAt: LocalDateTime = LocalDateTime.now(),
+    val receivedAt: LocalDateTime? = LocalDateTime.now(),
 
     @Column(columnDefinition = "TEXT")
     var notes: String? = null
